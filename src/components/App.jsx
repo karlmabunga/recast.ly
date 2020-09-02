@@ -23,10 +23,22 @@ import exampleVideoData from '../data/exampleVideoData.js';
 //   </div>);
 // };
 
-class App extends React.component {
+class App extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      videos: exampleVideoData,
+      currentVideo: exampleVideoData[0]
+    };
   }
+  // onclick function
+  onVideoClick(video) {
+    this.setState({
+      currentVideo: video
+    });
+  }
+
   render() {
     return (<div>
       <nav className="navbar">
@@ -36,10 +48,14 @@ class App extends React.component {
       </nav>
       <div className="row">
         <div className="col-md-7">
-          <div><h5><em><VideoPlayer video={exampleVideoData[0]} /></em></h5></div>
+          <div><h5><em><VideoPlayer video={this.state.currentVideo} /></em></h5></div>
         </div>
         <div className="col-md-5">
-          <div><h5><em><VideoList videos={exampleVideoData} /></em></h5></div>
+          <div><h5><em>
+            <VideoList
+              videos={this.state.videos}
+              onVideoClick={this.onVideoClick.bind(this)}
+            /></em></h5></div>
         </div>
       </div>
     </div >);
