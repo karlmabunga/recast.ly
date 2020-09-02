@@ -38,12 +38,16 @@ class App extends React.Component {
       currentVideo: video
     });
   }
+  // create search function
+  getYoutubeVideos() {
+
+  }
 
   render() {
     return (<div>
       <nav className="navbar">
         <div className="col-md-6 offset-md-3">
-          <div><h5><em><Search /></em> view goes here</h5></div>
+          <div><h5><em><Search KEY={props.YOUTUBE_API_KEY}/></em> view goes here</h5></div>
         </div>
       </nav>
       <div className="row">
