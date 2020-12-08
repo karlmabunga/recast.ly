@@ -32,6 +32,12 @@ class App extends React.Component {
       currentVideo: exampleVideoData[0]
     };
   }
+
+  // component mounting right away
+  componentDidMount() {
+    this.getYoutubeVideos('Hack Reactor');
+  }
+
   // onclick function
   onVideoClick(video) {
     this.setState({
@@ -39,15 +45,25 @@ class App extends React.Component {
     });
   }
   // create search function
-  getYoutubeVideos() {
-
+  getYoutubeVideos(query) {
+    let options = {
+      key: this.props.API_KEY,
+      query: query,
+    };
+    this.props.youTubeSearch(options, (videos) => {
+      this.setState({
+        currentVideo: videos[0],
+        videos: videos,
+      });
+    });
   }
 
   render() {
+    var { API_KEY } = this.props;
     return (<div>
       <nav className="navbar">
         <div className="col-md-6 offset-md-3">
-          <div><h5><em><Search KEY={props.YOUTUBE_API_KEY}/></em> view goes here</h5></div>
+          <div><h5><em><Search getYoutubeVideos={this.getYoutubeVideos.bind(this)} /></em> view goes here</h5></div>
         </div>
       </nav>
       <div className="row">
